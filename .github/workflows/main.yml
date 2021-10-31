@@ -6,6 +6,8 @@ jobs:
   build:
     name: Build my project ✨
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')"
+
     steps:
       # Checkout
       - name: Checkout repository
@@ -28,7 +30,7 @@ jobs:
       #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
       #   with:
       #     githubToken: ${{ secrets.GITHUB_TOKEN }}
-
+ 
       # Build
       - name: Build project
         uses: game-ci/unity-builder@v2
